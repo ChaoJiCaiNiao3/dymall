@@ -11,3 +11,9 @@ services:
       - MYSQL_RANDOM_ROOT_PASSWORD="yes"
     volumes:
       - ./db:/docker-entrypoint-initdb.d
+  consul:
+    image: "hashicorp/consul:latest"
+    ports:
+      - "8500:8500"
+    environment:
+      CONSUL_BIND_INTERFACE: eth0
