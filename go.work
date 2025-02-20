@@ -1,0 +1,11 @@
+go 1.23.4
+
+use (
+	./app/cart
+	./app/checkout
+	./app/auth
+	./app/order
+	./app/payment
+	./app/product
+	./app/user
+)
