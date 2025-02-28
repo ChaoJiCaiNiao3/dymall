@@ -156,3 +156,39 @@ func (s *UserServiceImpl) Login(ctx context.Context, req *user.LoginReq) (resp *
 
 	return resp,nil
 }
+
+func (s *UserServiceImpl) GetAddress(ctx context.Context, req *user.GetAddressReq) (resp *user.GetAddressResp, err error) {
+	// TODO: Your code here...
+	resp=&user.GetAddressResp{}
+	if req.UserID==0 {
+		resp.Code=400
+		resp.Message="用户ID不能为空"
+		return resp,nil
+	}
+	if.db==nil {
+.db,err=initDB()
+		if err!=nil {
+			resp.Code=500
+			resp.Message="数据库连接失败"
+			return resp,nil
+		}	
+	}
+	var address string
+	query:="select address from address where id=?"
+	err=s.db.QueryRowContext(ctx,query,req.UserID).Scan(&address)
+	if err!=nil {
+		if err==sql.ErrNoRows {
+			resp.Code=404
+			resp.Message="用户不存在"
+		}
+		else {
+			resp.Code=500
+			resp.Message="获取地址失败"
+		}
+		return resp,nil
+	}
+	resp.Code=200
+	resp.Message="获取地址成功"
+	resp.Address=address
+	return resp,nil
+}
