@@ -1,8 +1,9 @@
 package main
 
 import (
-	auth "github.com/ChaoJiCaiNiao3/dymall/app/auth/kitex_gen/auth/authservice"
 	"log"
+
+	auth "github.com/ChaoJiCaiNiao3/dymall/app/auth/kitex_gen/auth/authservice"
 )
 
 func main() {
