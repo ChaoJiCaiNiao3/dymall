@@ -4,9 +4,10 @@ package payment;
 
 option go_package = "payment";
 
-
 service PaymentService {
   rpc Charge(ChargeReq) returns (ChargeResp) {}
+  rpc CancelPayment(CancelPaymentReq) returns (CancelPaymentResp) {}
+  rpc ScheduleCancelPayment(ScheduleCancelPaymentReq) returns (ScheduleCancelPaymentResp) {}
 }
 
 message CreditCardInfo {
@@ -25,4 +26,21 @@ message ChargeReq {
 
 message ChargeResp {
   string transaction_id = 1;
+}
+
+message CancelPaymentReq {
+  string order_id = 1;
+}
+
+message CancelPaymentResp {
+  bool success = 1;
+}
+
+message ScheduleCancelPaymentReq {
+  string order_id = 1;
+  int64 cancel_time = 2; // Unix timestamp
+}
+
+message ScheduleCancelPaymentResp {
+  bool success = 1;
 }
